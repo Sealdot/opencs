@@ -1,0 +1,13 @@
+{
+  "example": "saas-billing",
+  "allowed_tools": [
+    "get_customer",
+    "get_invoice"
+  ],
+  "forbidden_tools": [
+    "issue_refund"
+  ],
+  "refund_execution": "external_human_process",
+  "handoff_reason": "refund_requires_approval",
+  "expected_resolution": "pending_human"
+}

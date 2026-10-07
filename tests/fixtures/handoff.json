@@ -1,0 +1,53 @@
+{
+  "id": "ho_982",
+  "tenant_id": "tenant_acme",
+  "conversation_id": "conv_01",
+  "state": "requested",
+  "attempt": 1,
+  "version": 1,
+  "from": {
+    "type": "ai_agent",
+    "id": "billing_agent"
+  },
+  "to": {
+    "type": "human_queue",
+    "id": "billing_support"
+  },
+  "reason": {
+    "code": "refund_requires_approval",
+    "description": "Billing refunds require human approval."
+  },
+  "customer": {
+    "id": "cus_01",
+    "organization_id": "org_acme"
+  },
+  "intent": {
+    "primary": "billing_dispute",
+    "confidence": 0.94
+  },
+  "priority": {
+    "level": "high",
+    "reason": "enterprise_customer"
+  },
+  "summary": "Duplicate charge requires human refund review.",
+  "facts": [
+    "invoice INV-3021",
+    "duplicate charge confirmed"
+  ],
+  "actions_completed": [
+    "customer_checked",
+    "invoice_checked"
+  ],
+  "actions_pending": [
+    "refund_approval"
+  ],
+  "recommended_action": {
+    "tool": "human_refund_review",
+    "parameters": {
+      "invoice_id": "INV-3021"
+    }
+  },
+  "evidence_refs": [
+    "fixture:request-1"
+  ]
+}

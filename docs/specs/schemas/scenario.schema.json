@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "properties": {
+    "scenario": {
+      "type": "string",
+      "minLength": 1
+    },
+    "given": {
+      "type": "object"
+    },
+    "user": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expect": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tools": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "forbidden": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "required",
+            "forbidden"
+          ],
+          "additionalProperties": false
+        },
+        "handoff": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "required"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "required": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "reason"
+                ]
+              }
+            }
+          ]
+        },
+        "resolution": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "intent",
+        "tools",
+        "handoff",
+        "resolution"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "scenario",
+    "given",
+    "user",
+    "expect"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenCS 0.0 scenario",
+  "$comment": "D4/D6 baseline; format validation does not prove real execution.",
+  "$id": "urn:opencs:schema:scenario:0.0"
+}

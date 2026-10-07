@@ -1,0 +1,38 @@
+{
+  "scenario": "duplicate_charge_enterprise",
+  "run_id": "format-fixture-only",
+  "evaluated_at": "2026-09-05T01:00:00Z",
+  "metrics": {
+    "resolution": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    },
+    "correctness": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    },
+    "grounding": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    },
+    "policy_compliance": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    },
+    "tool_correctness": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    },
+    "handoff_quality": {
+      "status": "not_evaluated",
+      "evidence_refs": [],
+      "explanation": "Format fixture only; no runtime has been executed."
+    }
+  },
+  "assertions": []
+}

@@ -1,0 +1,54 @@
+{
+  "baseline": "0.0",
+  "initial_state": "requested",
+  "states": [
+    "requested",
+    "accepted",
+    "in_progress",
+    "completed",
+    "cancelled",
+    "failed"
+  ],
+  "active_states": [
+    "requested",
+    "accepted",
+    "in_progress"
+  ],
+  "transitions": [
+    {
+      "from": "requested",
+      "to": "accepted",
+      "trigger": "human_acceptance"
+    },
+    {
+      "from": "requested",
+      "to": "cancelled",
+      "trigger": "cancellation"
+    },
+    {
+      "from": "requested",
+      "to": "failed",
+      "trigger": "failure"
+    },
+    {
+      "from": "accepted",
+      "to": "in_progress",
+      "trigger": "human_service_action"
+    },
+    {
+      "from": "in_progress",
+      "to": "completed",
+      "trigger": "completion"
+    },
+    {
+      "from": "in_progress",
+      "to": "failed",
+      "trigger": "failure"
+    },
+    {
+      "from": "failed",
+      "to": "requested",
+      "trigger": "retry"
+    }
+  ]
+}

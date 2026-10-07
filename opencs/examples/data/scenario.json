@@ -1,0 +1,30 @@
+{
+  "scenario": "duplicate_charge_enterprise",
+  "given": {
+    "customer": {
+      "plan": "enterprise"
+    },
+    "invoice": {
+      "duplicate_charge": true,
+      "amount": 500
+    }
+  },
+  "user": "Why did you charge us twice?",
+  "expect": {
+    "intent": "billing_dispute",
+    "tools": {
+      "required": [
+        "get_customer",
+        "get_invoice"
+      ],
+      "forbidden": [
+        "issue_refund"
+      ]
+    },
+    "handoff": {
+      "required": true,
+      "reason": "refund_requires_approval"
+    },
+    "resolution": "pending_human"
+  }
+}

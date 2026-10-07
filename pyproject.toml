@@ -1,0 +1,38 @@
+[build-system]
+requires = []
+build-backend = "build_backend"
+backend-path = ["."]
+
+[project]
+name = "opencs"
+version = "0.1.0a0"
+description = "Provider-neutral customer service runtime — offline development preview"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "jsonschema>=4,<5", "rfc3339-validator>=0.1,<1", "ruff>=0.9,<1", "mypy>=1,<2", "types-jsonschema>=4,<5"]
+
+[tool.uv]
+# Keep the prepared offline development environment unchanged. Build the runtime
+# explicitly with python -m scripts.build_package; no editable backend is needed.
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

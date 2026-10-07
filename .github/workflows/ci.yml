@@ -1,0 +1,41 @@
+name: Offline preview candidate
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen release snapshot before creating outputs
+        if: github.event_name == 'workflow_dispatch'
+        run: python -B -m scripts.release_candidate check --root .
+      - name: Install locked development tools
+        run: |
+          python -m pip install uv==0.10.8
+          uv sync --locked
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy opencs adapters scripts tests build_backend.py
+      - run: uv run pytest
+      - run: uv run python scripts/check_foundation.py --contracts-only
+      - name: Build artifacts outside source
+        run: uv run python -m scripts.build_package --out "${{ runner.temp }}/opencs-artifacts"
+      - name: Fresh wheel and sdist installs, normal + three fault scenarios each
+        run: >-
+          uv run python -m scripts.verify_distributions
+          --dist "${{ runner.temp }}/opencs-artifacts"
+          --output "${{ runner.temp }}/opencs-evidence/smoke.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opencs-0.1.0a0-offline-candidate
+          path: |
+            ${{ runner.temp }}/opencs-artifacts/
+            ${{ runner.temp }}/opencs-evidence/
+          if-no-files-found: error

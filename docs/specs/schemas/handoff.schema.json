@@ -1,0 +1,246 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conversation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "requested",
+        "accepted",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "failed"
+      ]
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "from": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "to": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "reason": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "code",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "organization_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "organization_id"
+      ],
+      "additionalProperties": false
+    },
+    "intent": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "primary",
+        "confidence"
+      ],
+      "additionalProperties": false
+    },
+    "priority": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "level",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "actions_completed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "actions_pending": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "recommended_action": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "tool",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "tenant_id",
+    "conversation_id",
+    "state",
+    "attempt",
+    "version",
+    "from",
+    "to",
+    "reason",
+    "customer",
+    "intent",
+    "priority",
+    "summary",
+    "facts",
+    "actions_completed",
+    "actions_pending",
+    "recommended_action",
+    "evidence_refs"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:opencs:schema:handoff:0.0",
+  "title": "OpenCS 0.0 handoff snapshot",
+  "$comment": "D2/D3 structural baseline; persisted state and authority validated separately.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "accepted",
+              "in_progress",
+              "completed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

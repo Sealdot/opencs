@@ -1,0 +1,17 @@
+{
+  "event_id": "evt_01",
+  "tenant_id": "tenant_acme",
+  "conversation_id": "conv_01",
+  "customer_id": "cus_01",
+  "channel": {
+    "type": "voice",
+    "provider": "livekit"
+  },
+  "event": {
+    "type": "customer_message",
+    "content_type": "text",
+    "content": "昨天的退款问题处理了吗？"
+  },
+  "occurred_at": "2026-09-05T01:00:00Z",
+  "metadata": {}
+}

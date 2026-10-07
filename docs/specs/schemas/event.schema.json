@@ -1,0 +1,334 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conversation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "provider"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "conversation_started",
+            "customer_message",
+            "agent_message",
+            "human_message",
+            "tool_call",
+            "tool_result",
+            "task_started",
+            "task_completed",
+            "handoff_requested",
+            "handoff_accepted",
+            "handoff_completed",
+            "handoff_cancelled",
+            "conversation_resolved",
+            "conversation_reopened",
+            "evaluation_completed",
+            "handoff_in_progress",
+            "handoff_failed"
+          ]
+        },
+        "content_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": [
+            "string",
+            "object",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "content_type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "event_id",
+    "tenant_id",
+    "conversation_id",
+    "customer_id",
+    "channel",
+    "event",
+    "occurred_at",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenCS 0.0 event envelope",
+  "$comment": "D3/D5 baseline; authorization, equality and persistence checked outside JSON Schema.",
+  "$id": "urn:opencs:schema:event:0.0",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_requested"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "requested"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_accepted"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "accepted"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_in_progress"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "in_progress"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_completed"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "completed"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_cancelled"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "cancelled"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "type": {
+                "const": "handoff_failed"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event": {
+            "properties": {
+              "content_type": {
+                "const": "application/json"
+              },
+              "content": {
+                "allOf": [
+                  {
+                    "$ref": "urn:opencs:schema:handoff:0.0"
+                  },
+                  {
+                    "properties": {
+                      "state": {
+                        "const": "failed"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

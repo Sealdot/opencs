@@ -1,0 +1,23 @@
+{
+  "event": "message_created",
+  "id": 101,
+  "account": {
+    "id": 1
+  },
+  "inbox": {
+    "id": 2
+  },
+  "conversation": {
+    "id": 42,
+    "status": "open"
+  },
+  "sender": {
+    "id": 7,
+    "name": "Synthetic test contact"
+  },
+  "content": "Why did you charge us twice?",
+  "content_type": "text",
+  "message_type": "incoming",
+  "private": false,
+  "created_at": "2026-09-07T08:00:00Z"
+}
