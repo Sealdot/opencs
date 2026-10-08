@@ -1,4 +1,15 @@
-# OpenCS 0.1.0a0 离线预览候选 — 2026-10-07
+# OpenCS 0.1.0a0 离线预览状态
+
+## 公开状态补记 — 2026-10-08
+
+[公开仓库](https://github.com/Sealdot/opencs)与 [v0.1.0a0 GitHub prerelease](https://github.com/Sealdot/opencs/releases/tag/v0.1.0a0)已于 2026-10-07 发布。
+标签对应公开提交 `be9a2c2a9da389fb409e78a469083ee5f85abec2`；该提交的 [push CI](https://github.com/Sealdot/opencs/actions/runs/37622160952)与[手动冻结快照 CI](https://github.com/Sealdot/opencs/actions/runs/37622178303)均已通过。
+[许可与权属核对](../release/LICENSE_AUDIT.md)已记录维护者发布授权及有界 kit 来源追溯，并保留证据限制；该记录不构成独立权属证明或法律意见。
+本次发布仍仅覆盖既有 IM Runtime 的离线开发预览，PyPI 不在范围内；下文生产与真实集成验收限制继续适用。
+
+## 发布前候选快照 — 2026-10-07
+
+以下保留发布准备阶段的原始记录；其中“托管 CI 尚未运行”和“剩余公开前工作”等描述仅适用于当时。当前公开状态以上方补记及链接证据为准。
 
 本轮只收口既有 IM Runtime，没有新增架构、Voice、生产数据库或供应商。
 Foundation D1–D6 已批准；原离线任务与后续 HTTP 契约实现保留。

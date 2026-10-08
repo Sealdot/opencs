@@ -2,10 +2,10 @@
 
 OpenCS 是 AI Agent 与客服系统之间的领域运行时：将会话、身份、工具权限、AI 与人工责任、审计和场景评估落实为可测试的代码。
 
-**0.1.0a0：离线开发预览候选，API 尚不稳定，不能用于生产客服。**
+**0.1.0a0：已发布 [GitHub prerelease](https://github.com/Sealdot/opencs/releases/tag/v0.1.0a0)，仅供离线开发预览，API 尚不稳定，不能用于生产客服。**
 本轮仅收口已有 IM Runtime；Voice、生产数据库和新增供应商集成暂停。
 公开源码采用[逐文件清单](docs/release/public-files.json)，不携带原始 kit、第三方 checkout 或上游贡献历史。
-[许可与权属核对](docs/release/LICENSE_AUDIT.md)仍有待维护者确认的项目；技术验证通过不代表权属已确认。
+[许可与权属核对](docs/release/LICENSE_AUDIT.md)已记录维护者发布授权及有界 kit 来源追溯；该记录保留证据限制，不构成独立权属证明或法律意见。
 
 ## 10 分钟运行
 
@@ -93,9 +93,10 @@ uv run python scripts/check_foundation.py --contracts-only
 [CI](.github/workflows/ci.yml)还会从干净 wheel/sdist 环境验证四个场景，并校验 sdist 重建 wheel 一致。
 发布前手动触发同一工作流还会检查冻结快照哈希；日常 PR 可正常修改源码，新增公开文件须更新清单。
 
-## 候选与许可
+## 发布与许可
 
 源码采用 [Apache-2.0](LICENSE) 声明；开发依赖保留各自许可证且不打包进 runtime。
-原 kit 未提供独立授权证明；kit 衍生文档与自有代码权属确认见[逐项核对](docs/release/LICENSE_AUDIT.md)。
-[Alpha Release 草稿](docs/release/ALPHA_RELEASE.md)、[公开步骤](docs/release/PUBLISHING.md)和[候选状态](docs/execution/STATUS.md)列出验收与剩余工作。
-本轮未创建公开远端、未上传 Release、未发布 PyPI，也不宣称正式 V0.1 退出条件通过。
+原 kit 未提供独立授权证明；kit 衍生文档与自有代码的维护者授权及证据限制见[逐项核对](docs/release/LICENSE_AUDIT.md)。
+[公开仓库](https://github.com/Sealdot/opencs)与 [v0.1.0a0 prerelease](https://github.com/Sealdot/opencs/releases/tag/v0.1.0a0)已于 2026-10-07 发布；该标签对应公开提交 `be9a2c2a9da389fb409e78a469083ee5f85abec2`。
+该提交的 [push CI](https://github.com/Sealdot/opencs/actions/runs/37622160952)与[手动冻结快照 CI](https://github.com/Sealdot/opencs/actions/runs/37622178303)均已通过；详见[发布状态](docs/execution/STATUS.md)。
+[Alpha Release 草稿](docs/release/ALPHA_RELEASE.md)与[公开步骤](docs/release/PUBLISHING.md)保留发布准备说明。PyPI 不在本次发布范围内，也不宣称正式 V0.1 退出条件通过。
