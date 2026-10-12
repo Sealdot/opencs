@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_project_version_and_dependency_free_build_contract() -> None:
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())
-    assert opencs.__version__ == project["project"]["version"] == "0.1.0a0"
+    assert opencs.__version__ == project["project"]["version"] == "0.1.0a1"
     assert project["project"]["dependencies"] == []
     assert project["project"]["requires-python"] == ">=3.12"
     assert project["build-system"] == {

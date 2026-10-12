@@ -30,6 +30,9 @@ Out of scope: new evaluator rules, scoring, routing or provider setup.
 
 ## 3. Verify wheel/sdist acceptance on Python 3.13 in CI
 
+Completed by [PR #4](https://github.com/Sealdot/opencs/pull/4), merged on 2026-10-12.
+Both versions passed [hosted CI](https://github.com/Sealdot/opencs/actions/runs/38225304499), including 601 tests and fresh wheel/sdist acceptance per interpreter. The original task scope follows for reference.
+
 Problem: the current candidate has direct local acceptance on Python 3.12 only,
 while metadata permits 3.12+.
 Scope: extend the existing CI Python matrix to 3.13, using the same locked tools

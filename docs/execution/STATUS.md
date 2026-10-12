@@ -1,4 +1,14 @@
-# OpenCS 0.1.0a0 离线预览状态
+# OpenCS 0.1.0a1 离线预览状态
+
+## Python 3.13 验证补记 — 2026-10-12
+
+[PR #4](https://github.com/Sealdot/opencs/pull/4) 已合并，CI 在 Python 3.12 和 3.13 上分别运行完整检查，显式选择并断言实际解释器版本，分别保存构建与安装后验收产物。
+[PR CI](https://github.com/Sealdot/opencs/actions/runs/38225304499) 的两个版本均为 601 项测试通过；格式、lint、类型、契约、wheel/sdist 安装、八个预期场景结果与 sdist 重建一致性检查均通过。
+本地 macOS ARM64 的 Python 3.12.13 / 3.13.12 也通过同一套检查。
+
+0.1.0a1 是此项验证补齐的独立 GitHub 预发布版本。版本元数据与安装示例同步更新，运行时 API、领域规则和第三方依赖版本保持原样。
+发布前从公开仓库的已提交文件重新导出逐文件清单与冻结哈希；发布门槛为标签对应提交的 push CI 与手动冻结快照 CI，两者的实际链接、源码和包校验和见 [v0.1.0a1 Release](https://github.com/Sealdot/opencs/releases/tag/v0.1.0a1)。
+v0.1.0a0 的标签与附件保留。Python 3.14+ 和真实服务仍未验证，PyPI 不在本次发布范围内。
 
 ## 公开状态补记 — 2026-10-08
 
