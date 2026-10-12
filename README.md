@@ -10,7 +10,7 @@ OpenCS 是 AI Agent 与客服系统之间的领域运行时：将会话、身份
 ## 10 分钟运行
 
 适合想学习客服领域边界、验证工具权限与人工交接、贡献测试或文档的 Python 开发者。
-需要 Python **3.12+**（本次验证为 3.12）；不需要 Docker、服务账号、API key 或模型下载。
+需要 Python **3.12+**；CI 覆盖 3.12 和 3.13，其他版本尚未验证。不需要 Docker、服务账号、API key 或模型下载。
 获得候选源码目录后，在目录根执行。以下是 macOS/Linux 命令；Windows 激活路径为 `.preview\Scripts\activate`。
 
 ```sh
@@ -90,7 +90,8 @@ uv run python scripts/check_foundation.py --contracts-only
 
 已有离线开发环境使用 `UV_OFFLINE=1 uv run --no-sync ...`。
 公开源目录不含 kit/Spike；`--contracts-only` 显式验证 Schema/fixture，完整私人工作区默认命令继续校验原 kit。
-[CI](.github/workflows/ci.yml)还会从干净 wheel/sdist 环境验证四个场景，并校验 sdist 重建 wheel 一致。
+[CI](.github/workflows/ci.yml)在 Python 3.12 和 3.13 上分别运行完整检查，显式选择解释器并断言实际版本。
+每个版本还会从干净 wheel/sdist 环境验证四个场景，并校验 sdist 重建 wheel 一致；产物和验收记录按 Python 版本分别保存。
 发布前手动触发同一工作流还会检查冻结快照哈希；日常 PR 可正常修改源码，新增公开文件须更新清单。
 
 ## 发布与许可
