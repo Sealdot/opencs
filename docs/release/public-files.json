@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0a0",
+  "version": "0.1.0a1",
   "selection": "exact_files_only; no_private_history_or_archives",
   "files": [
     ".env.example",

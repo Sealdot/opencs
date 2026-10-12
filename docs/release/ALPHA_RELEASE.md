@@ -1,57 +1,57 @@
-# OpenCS 0.1.0a0 — Offline Development Preview
+# OpenCS 0.1.0a1 — Python 3.13 Validation Preview
 
-Distribution: GitHub **prerelease**, not a production release. This candidate freezes existing IM functionality and adds release
-packaging, documentation and reproducibility checks. APIs may change.
+GitHub **prerelease** for offline development. APIs remain unstable; this preview
+cannot be used for production customer service.
 
-OpenCS makes customer-service identity, conversation, tool permissions, AI/human
-responsibility, audit and scenario assertions explicit. This alpha is for developers
-learning the contracts or contributing focused tests and documentation.
+## Changes from 0.1.0a0
 
-## Included
-
-Provider-neutral Python domain/application code, in-memory repository/store,
-lightweight API, existing Chatwoot/Responses/HTTP adapters, a synthetic billing CLI,
-contract/runtime/adapter tests, schemas, a standard-library PEP 517 backend and CI.
-Runtime and build dependencies are empty; Python 3.12+ is required.
+- CI runs the complete offline checks on Python 3.12 and 3.13, explicitly selects
+  the interpreter and asserts its actual version before validation.
+- Each version builds and freshly installs wheel and sdist, verifies the normal
+  billing demo and three expected fault scenarios for each installation, and
+  confirms that rebuilding from sdist produces an identical wheel.
+- Matrix failures are independent, and artifacts/evidence have version-specific
+  names. Installation examples and package metadata now use 0.1.0a1.
+- Runtime APIs, D1–D6 domain rules, provider scope and dependency versions are
+  unchanged. The original v0.1.0a0 tag and attachments remain available.
 
 ## Try it
 
-Follow the README ten-minute source-build or local-wheel installation. The normal
-billing demo exits 0 with `pending_human`. `forbidden-tool`, `tool-failure` and
-`send-timeout` intentionally exit 1. Decisions/responses are scripted, no provider
-or real model is called, and replay does not add external actions.
+Python 3.12+ is required; 3.12 and 3.13 are validated. Other versions are unverified.
+Runtime and build dependencies are empty. No Docker, provider account, API key or
+model download is needed for the offline billing demo.
+
+Follow the [README](https://github.com/Sealdot/opencs/blob/v0.1.0a1/README.md) to build
+from source or install the wheel with `--no-index --no-deps --no-build-isolation`.
+The normal billing demo exits 0 with `pending_human`; `forbidden-tool`,
+`tool-failure` and `send-timeout` intentionally exit 1. Decisions and responses are
+scripted, provider_calls=0, and replay does not add external actions.
 
 ## Verification and attachments
 
-Attach the wheel, rebuildable sdist, exact public-source snapshot, SHA256SUMS and
-sanitized verification record from the frozen candidate. SOURCE_BASELINE.json
-identifies the private source commit and all selected file hashes; the separate
-public root commit contains only the reviewed snapshot. Do not attach the private
-workspace or its Git history. The clean-environment verifier installs both artifacts
-into separate venvs, blocks sockets during all eight demo runs and compares rebuilt
-wheel bytes. Local check counts belong in the accompanying evidence record.
-Publication requires passing push CI and the manually dispatched frozen-snapshot
-workflow on the exact tagged public commit; actual run links accompany the Release.
-The manually dispatched workflow adds the frozen-source hash gate; normal push/PR
-checks allow reviewed contribution changes without imposing historical file hashes.
+The Release includes wheel, rebuildable sdist, the exact allowlisted public-source
+snapshot, SHA256SUMS and a sanitized verification record. SOURCE_BASELINE.json
+identifies the reviewed public source commit and selected file hashes; archives
+exclude private workspace assets, Git history, caches and credentials.
 
-## Limits
+Release publication requires push CI and manually dispatched frozen-snapshot CI
+on the exact tagged public commit, for both Python versions. Run links and actual
+test counts accompany the Release in its verification record. The installer
+verifier blocks sockets during all eight demo runs and compares rebuilt wheel
+bytes. This evidence covers the offline reference runtime only.
 
-State, deduplication and audit are process-local memory; restart loses them. No
-production persistence, recovery, horizontal scaling or deployment acceptance.
+## Limits and license
+
+State, deduplication and audit remain process-local memory; restart loses them.
+Production persistence, recovery, horizontal scaling and deployment are unverified.
 `pending_human` and successful assignment do not mean human acceptance or resolution.
-Real Chatwoot/authentication/queue behavior, OpenAI inference/model quality and
-Voice/media integrations remain `live_not_run`. Offline quality metrics are limited;
-Resolution, Correctness and Grounding remain `not_evaluated` in this demo.
-No new Voice, database or provider scope is part of this release.
+Real Chatwoot authentication/queues, OpenAI inference/model quality and Voice/media
+integrations remain `live_not_run`. Resolution, Correctness and Grounding remain
+`not_evaluated` in this demo; there is no aggregate model-quality score.
 
-## License and remaining work
-
-Apache-2.0 is the declared project license. Developer dependencies keep their own
-licenses and are not vendored. The [license audit](https://github.com/Sealdot/opencs/blob/v0.1.0a0/docs/release/LICENSE_AUDIT.md)
-records maintainer authorization and the bounded kit-source trace, including its
-evidence limits. Private security reporting and a maintainer contact are documented
-in SECURITY.md and CODE_OF_CONDUCT.md. No PyPI publication is included.
-
-Next contributions are the three [scoped issue drafts](https://github.com/Sealdot/opencs/blob/v0.1.0a0/docs/release/STARTER_ISSUES.md). Live
-integration and production work require separate resources and acceptance later.
+Apache-2.0 is the declared license. Developer dependencies keep their own licenses
+and are not bundled into the runtime. The
+[license audit](https://github.com/Sealdot/opencs/blob/v0.1.0a1/docs/release/LICENSE_AUDIT.md)
+retains the maintainer authorization, bounded kit-source trace and evidence limits.
+Security/community reporting contacts remain in SECURITY.md and CODE_OF_CONDUCT.md.
+PyPI publication, Python 3.14+ and new live integrations are outside this release.

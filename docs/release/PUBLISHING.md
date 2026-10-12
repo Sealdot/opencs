@@ -1,5 +1,34 @@
 # Candidate handoff and concrete publication steps
 
+## Subsequent offline preview: 0.1.0a1
+
+The maintainer authorized merging PR #4 and publishing its Python 3.13 validation
+follow-up on 2026-10-12. Publish a new GitHub prerelease, keeping the existing
+v0.1.0a0 tag and assets. No PyPI publication, runtime API change or dependency
+upgrade is part of this release.
+
+1. Update package/runtime/manifest versions and the root lockfile metadata, keeping
+   all development dependency versions unchanged. Update installation examples,
+   release notes and verification documentation; run both Python versions' checks.
+2. Commit the reviewed changes in the public repository. Use the same allowlist
+   exporter to a new destination and check it before creating caches. Copy its
+   generated SOURCE_BASELINE.json back to the public branch and commit that file.
+   Its source_commit now identifies a public reviewed commit, rather than a private
+   workspace commit. Preserve the allowlist and exclude private history and assets.
+3. Merge the release preparation PR with its reviewed commits retained. Wait for
+   both push CI and workflow_dispatch frozen-snapshot CI on the exact final main
+   commit. Both matrix entries must pass with independent artifact names.
+4. Download the verified artifacts and evidence, check cross-version wheel/sdist
+   hashes, and create the exact allowlisted public-source archive. Generate
+   SHA256SUMS and a sanitized record with commit and CI links. Check the source
+   archive inventory and frozen hashes before uploading.
+5. Create v0.1.0a1 at that exact public commit and publish the prerelease with the
+   wheel, sdist, public-source archive, checksums and verification record. Verify
+   downloaded Release files against SHA256SUMS. Keep live_not_run and unstable API
+   limits in the notes.
+
+## First Alpha publication — historical sequence
+
 The maintainer authorized the first public Alpha on 2026-10-07. Do not push the existing private workspace,
 its branch/history, or its dist directory. No PyPI upload is part of this preview.
 

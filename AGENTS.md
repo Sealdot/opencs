@@ -1,6 +1,6 @@
 # OpenCS Engineering Guide
 
-This is the 0.1.0a0 offline preview candidate. Do not expand architecture, Voice,
+This is the 0.1.0a1 offline preview candidate. Do not expand architecture, Voice,
 production storage or provider scope during release preparation. Runtime and build
 backend use only Python's standard library; prefer small typed modules and injection.
 
